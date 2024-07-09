@@ -1,0 +1,22 @@
+<h1>Cleaning Products</h1>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col" style="width: 20%;">Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of data">
+            <th scope="row">{{product.id}}</th>
+            <td>{{product.name}}</td>
+            <td [ngClass]="product.price > 10?'red-color': 'blue-color' ">{{product.price | currency}}</td>
+            <td class="text-center">
+                <button class="btn btn-primary" type="button" [routerLink]="['/products',  product.id]">Details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

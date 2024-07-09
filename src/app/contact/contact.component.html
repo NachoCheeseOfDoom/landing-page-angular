@@ -1,0 +1,18 @@
+<form class="mt-5" [formGroup]="contactForm" (ngSubmit)="sendMail()">
+    <div class="form-floating mb-3">
+        <input [ngClass]="!hasError('name', 'required','minlength') ? 'is-valid' : 'is-invalid'" type="text"
+            class="form-control" id="name" placeholder="" formControlName="name">
+        <label for="name">Name</label>
+        <!-- <div [className]="validName === 'VALID' ? 'valid-feedback': 'invalid-feedback'" </div> -->
+        <div *ngIf="hasError('name', 'required','minlength')"> Enter valid Name </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input [ngClass]="!hasError('email', 'required', 'email') ? 'is-valid' : 'is-invalid'" type="email"
+            class="form-control" id="email" placeholder="" formControlName="email">
+        <label for="email">Email address</label>
+        <!-- <div [className]="validEmail === 'VALID' ? 'valid-feedback': 'invalid-feedback'"> Enter valid Email </div> -->
+        <div *ngIf="hasError('email', 'required', 'email')"> Enter valid Email </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
