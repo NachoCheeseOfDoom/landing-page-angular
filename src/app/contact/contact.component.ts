@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,16 +9,25 @@ import { CommonModule } from '@angular/common';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
 
   contactForm: FormGroup;
-  validName?: string;
-  validEmail?: string;
+  nicType: string = 'NIC'
+
 
   constructor(private _form: FormBuilder) {
     this.contactForm = this._form.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
+      lastName: ['', [Validators.required, Validators.minLength(4)]],
+      nicType: ['', [Validators.required, Validators.minLength(4)]],
+      nic: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
+    })
+  }
+
+  ngOnInit(): void {
+    this.contactForm.get('nicType')?.valueChanges.subscribe(value => {
+      this.nicType = value;
     })
   }
 
@@ -38,10 +47,7 @@ export class ContactComponent {
 
   sendMail() {
     console.log(this.contactForm)
-    this.validName = this.contactForm.controls['name'].status;
-    this.validEmail = this.contactForm.controls['email'].status;
+    console.log(this.contactForm.get('name'))
 
-    // console.log("name: ", this.validName)
-    // console.log("Email: ", this.validEmail)
   }
 }

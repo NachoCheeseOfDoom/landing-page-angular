@@ -3,16 +3,38 @@
         <input [ngClass]="!hasError('name', 'required','minlength') ? 'is-valid' : 'is-invalid'" type="text"
             class="form-control" id="name" placeholder="" formControlName="name">
         <label for="name">Name</label>
-        <!-- <div [className]="validName === 'VALID' ? 'valid-feedback': 'invalid-feedback'" </div> -->
-        <div *ngIf="hasError('name', 'required','minlength')"> Enter valid Name </div>
+        <div *ngIf="hasError('name', 'required','minlength')"> Enter valid Name</div>
     </div>
+
+    <div class="form-floating mb-3">
+        <input [ngClass]="!hasError('lastName', 'required','minlength') ? 'is-valid' : 'is-invalid'" type="text"
+            class="form-control" id="lastName" placeholder="" formControlName="lastName">
+        <label for="lastName">Last name</label>
+        <div *ngIf="hasError('lastName', 'required','minlength')"> Enter valid last name</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="nicType" class="form-lable">NIC Type:</label>
+        <select class="form-select " id="nicType" formControlName="nicType">
+            <!-- <option selected>NIC Type:</option> -->
+            <option selected value="NIC">NIC</option>
+            <option value="Passport">Passport</option>
+            <option value="INE">INE</option>
+        </select>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input [ngClass]="!hasError('nic', 'required','minlength') ? 'is-valid' : 'is-invalid'" type="text"
+            class="form-control" id="nic" placeholder="" formControlName="nic">
+        <label for="nic">{{nicType}}</label>
+        <div *ngIf="hasError('nic', 'required','minlength')"> Enter valid {{nicType}}</div>
+    </div>
+
     <div class="form-floating mb-3">
         <input [ngClass]="!hasError('email', 'required', 'email') ? 'is-valid' : 'is-invalid'" type="email"
             class="form-control" id="email" placeholder="" formControlName="email">
         <label for="email">Email address</label>
-        <!-- <div [className]="validEmail === 'VALID' ? 'valid-feedback': 'invalid-feedback'"> Enter valid Email </div> -->
         <div *ngIf="hasError('email', 'required', 'email')"> Enter valid Email </div>
-
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
