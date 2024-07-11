@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+
 //COMPONENTS
 import { NavbarComponent } from './partials/navbar/navbar.component';
 

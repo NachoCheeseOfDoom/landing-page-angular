@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+//COMPONENT
+import { InfoComponent } from './info/info.component';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, InfoComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
 
   contactForm: FormGroup;
   nicType: string = 'NIC'
@@ -20,15 +23,21 @@ export class ContactComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(4)]],
       lastName: ['', [Validators.required, Validators.minLength(4)]],
       nicType: ['', [Validators.required, Validators.minLength(4)]],
-      nic: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
     })
   }
 
   ngOnInit(): void {
+    // this.contactForm.valueChanges.subscribe(value => {
+    //   console.log(value)
+    // })
     this.contactForm.get('nicType')?.valueChanges.subscribe(value => {
       this.nicType = value;
     })
+  }
+
+  ngOnDestroy(): void {
+    console.log('component destroyed')
   }
 
   //SINGLE ERROR HANDLER 👇

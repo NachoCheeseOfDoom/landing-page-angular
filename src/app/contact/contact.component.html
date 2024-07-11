@@ -23,12 +23,7 @@
         </select>
     </div>
 
-    <div class="form-floating mb-3">
-        <input [ngClass]="!hasError('nic', 'required','minlength') ? 'is-valid' : 'is-invalid'" type="text"
-            class="form-control" id="nic" placeholder="" formControlName="nic">
-        <label for="nic">{{nicType}}</label>
-        <div *ngIf="hasError('nic', 'required','minlength')"> Enter valid {{nicType}}</div>
-    </div>
+    <app-info [nicType]="nicType" />
 
     <div class="form-floating mb-3">
         <input [ngClass]="!hasError('email', 'required', 'email') ? 'is-valid' : 'is-invalid'" type="email"
@@ -37,4 +32,5 @@
         <div *ngIf="hasError('email', 'required', 'email')"> Enter valid Email </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+
 </form>
