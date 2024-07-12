@@ -1,8 +1,11 @@
+import { IProduct } from './../models/product.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../services/api.service';
 
-import { productData, Product } from '../products/products.data';
+//PRODUCT DATA
+// import { productData, Product } from '../products/products.data';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,21 +16,38 @@ import { productData, Product } from '../products/products.data';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor(private _route: ActivatedRoute) { }
 
-  product?: Product;
-  Data: Product[] = productData;
+  product?: IProduct;
   loading: boolean = true;
   color: string = '';
 
 
+  constructor(
+    private _route: ActivatedRoute,
+    private _apiService: ApiService
+  ) { }
+
+
+
   ngOnInit(): void {
-    this._route.params.subscribe((params) => {
-      setTimeout(() => {
-        this.product = this.Data.find(product => product.id === +params['productId'])
-        this.color = this.product?.price as number > 10 ? 'red' : 'blue';
-        this.loading = false;
-      }, 500);
+    this._route.params.subscribe({
+      next: (params: Params) => {
+
+        // this.product = this.Data.find(product => product.id === +params['productId'])
+        console.log(params)
+        this._apiService.getProductById(+params['productId']).subscribe({
+          next: (data: IProduct) => {
+            this.product = data;
+            this.color = this.product?.price as number > 105 ? 'red' : 'blue';
+            this.loading = false;
+          },
+          error: (error: any) => {
+            console.log(error)
+            console.log(error.message)
+            this.loading = false;
+          },
+        })
+      }
     })
   }
 

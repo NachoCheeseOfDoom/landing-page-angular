@@ -1,11 +1,37 @@
 <ng-container *ngIf="!loading">
-    <h3>Product: {{product?.name}}</h3>
-    <h4 [ngStyle]="{'color': color}">Price: {{product?.price |currency}}</h4>
-    <p *ngIf="product?.description">{{product?.description}}</p>
+    <div class="d-flex justify-content-center mt-4">
+        <div class="card" style="width: 20rem;">
+            <img src="{{product?.image}}" class="card-img-top m-auto" style="width: 150px;" alt="{{product?.title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{product?.title | uppercase}}</h5>
+                <h6 [ngStyle]="{'color': color}">Price: {{product?.price |currency}}</h6>
+                <p class="card-text">{{product?.description}}</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+        </div>
+    </div>
+
 </ng-container>
 
 <ng-container *ngIf="loading">
-    <h2>
-        <i style="color: blue;">Loading...</i>
+    <h2 class="mt-4">
+        <i style="color: orange;">Loading...</i>
     </h2>
+    <div class="d-flex justify-content-center mt-4 ">
+        <div class="card placeholder-glow" aria-hidden="true" style="width: 20rem;">
+            <img class="disabled placeholder col-8 m-auto " style="height: 250px;">
+            <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-12"></span>
+                </h5>
+                <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-1"></span>
+                    <span class="placeholder col-12"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
 </ng-container>

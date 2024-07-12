@@ -10,10 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of data">
+        <tr *ngFor="let product of productList">
             <th scope="row">{{product.id}}</th>
-            <td>{{product.name}}</td>
-            <td [ngClass]="product.price > 10?'red-color': 'blue-color' ">{{product.price | currency}}</td>
+            <td>{{product.title}}</td>
+            <td [ngClass]="product.price > 105?'red-color': 'blue-color' ">{{product.price | currency}}</td>
             <td class="text-center">
                 <button class="btn btn-primary" type="button" [routerLink]="['/products',  product.id]">Details</button>
             </td>
